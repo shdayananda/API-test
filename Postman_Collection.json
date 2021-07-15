@@ -1,0 +1,243 @@
+{
+	"info": {
+		"_postman_id": "7dd29d51-c0d5-4b1d-a251-6362e8af7b48",
+		"name": "New Collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "POST",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Validate schema\", () => {",
+							"            pm.response.to.have.jsonSchema({",
+							"    \"$schema\": \"http://json-schema.org/draft-07/schema\",",
+							"    \"$id\": \"http://example.com/example.json\",",
+							"    \"type\": \"object\",",
+							"    \"title\": \"The root schema\",",
+							"    \"description\": \"The root schema comprises the entire JSON document.\",",
+							"    \"default\": {},",
+							"    \"examples\": [",
+							"        {",
+							"            \"id\": \"383\",",
+							"            \"createdAt\": \"2021-07-15T12:13:48.785Z\"",
+							"        }",
+							"    ],",
+							"    \"required\": [",
+							"        \"id\",",
+							"        \"createdAt\"",
+							"    ],",
+							"    \"properties\": {",
+							"        \"id\": {",
+							"            \"$id\": \"#/properties/id\",",
+							"            \"type\": \"string\",",
+							"            \"title\": \"The id schema\",",
+							"            \"description\": \"An explanation about the purpose of this instance.\",",
+							"            \"default\": \"\",",
+							"            \"examples\": [",
+							"                \"383\"",
+							"            ]",
+							"        },",
+							"        \"createdAt\": {",
+							"            \"$id\": \"#/properties/createdAt\",",
+							"            \"type\": \"string\",",
+							"            \"title\": \"The createdAt schema\",",
+							"            \"description\": \"An explanation about the purpose of this instance.\",",
+							"            \"default\": \"\",",
+							"            \"examples\": [",
+							"                \"2021-07-15T12:13:48.785Z\"",
+							"            ]",
+							"        }",
+							"    },",
+							"    \"additionalProperties\": true",
+							"});",
+							"});",
+							"pm.test('Check Status', () => {",
+							"    if(pm.response.to.have.status (201)) {",
+							"        console.log(\"It's 201\")",
+							"    }",
+							"})",
+							"pm.test(\"Response time is less than 400ms\", () => {",
+							"  pm.expect(pm.response.responseTime).to.be.below(800);",
+							"});",
+							"pm.test(\"Content-Type header is present\", () => {",
+							"  pm.response.to.have.header(\"Content-Type\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "",
+							"type": "file",
+							"src": "/Users/shdayananda/Documents/response.csv"
+						}
+					],
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://reqres.in/api/users/2",
+					"protocol": "https",
+					"host": [
+						"reqres",
+						"in"
+					],
+					"path": [
+						"api",
+						"users",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var cResponse = pm.response.json();",
+							"pm.test(\"Verify user_id\",function(){",
+							"pm.expect(cResponse[0].userId).to.equal(4);",
+							"});",
+							"pm.test(\"Validate if title is string or not\",function(){",
+							"    pm.expect(cResponse[0].title).to.be.a('string');",
+							"});",
+							"pm.test('Check Status', () => {",
+							"    if(pm.response.to.have.status (200)) {",
+							"        console.log(\"It's 200\")",
+							"    }",
+							"})",
+							"pm.test(\"Response time is less than 400ms\", () => {",
+							"  pm.expect(pm.response.responseTime).to.be.below(400);",
+							"});",
+							"pm.test(\"Content-Type header is present\", () => {",
+							"  pm.response.to.have.header(\"Content-Type\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://jsonplaceholder.typicode.com/posts?id=40",
+					"protocol": "https",
+					"host": [
+						"jsonplaceholder",
+						"typicode",
+						"com"
+					],
+					"path": [
+						"posts"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "40"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PUT",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"tests[\"Text has been updated succefully\"] = ",
+							"  responseBody.has(\"updatedAt\");",
+							"  var date=new Date();",
+							"  pm.test(\"Date is in correct response format\",function(){",
+							"  pm.expect(pm.response.headers.get('Date')).to.equal(date.toUTCString())",
+							"  });"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "https://reqres.in/api/users/4",
+					"protocol": "https",
+					"host": [
+						"reqres",
+						"in"
+					],
+					"path": [
+						"api",
+						"users",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"tests[\"Has correct updated text\"] = ",
+							"  responseBody.has(\"{}\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://jsonplaceholder.typicode.com/posts/",
+					"protocol": "https",
+					"host": [
+						"jsonplaceholder",
+						"typicode",
+						"com"
+					],
+					"path": [
+						"posts",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
